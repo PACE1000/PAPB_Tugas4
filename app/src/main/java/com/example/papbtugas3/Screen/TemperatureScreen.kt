@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,6 +16,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDownward
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -32,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.papbtugas3.Asset.Topbar
 import com.example.papbtugas3.ui.theme.PAPBTugas3Theme
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -48,79 +51,88 @@ fun TemperatureScreen(navController: NavController){
     }
 
     var hasil = Hasil.toString()
-
-    Box(modifier = Modifier
-        .background(Color.Red)
-        .fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ){
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = "Masukkan Suhu",
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
-                color = Color.White)
-            TextField(
-                value = Suhu,
-                onValueChange = { Suhu = it },
-                modifier = Modifier
-                    .clip(RoundedCornerShape(20.dp))
-                    .background(Color.White),
-                placeholder = { Text(text = "Masukkan Suhu")})
-            Spacer(modifier = Modifier.height(10.dp))
-            Icon(
-                imageVector = Icons.Default.ArrowDownward,
-                contentDescription = "Konversi Suhu",
-                tint = Color.White,
-                modifier =Modifier.size(20.dp))
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            Text(
-                text = "Hasil",
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
-                color = Color.White)
-            TextField(
-                value = hasil,
-                onValueChange = { hasil = it },
-                modifier = Modifier
-                    .clip(RoundedCornerShape(20.dp))
-                    .background(Color.White),
-                placeholder = { Text(text = "Masukkan Suhu")})
-            Spacer(modifier = Modifier.height(10.dp))
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+    Scaffold(
+        topBar = { Topbar()},
+        content = {
+            padding ->
+            Column(
+                modifier = Modifier.padding(padding)
             ) {
-                Button(onClick = {
-                    Hasil = RumusSuhu(Suhu = Suhu, Kode ="F")
-                    Hasil.setScale(2,RoundingMode.CEILING)
-                }) {
-                    Text(text = "F")
-                }
-                Spacer(modifier = Modifier.width(10.dp))
+                Box(modifier = Modifier
+                    .background(Color.Red)
+                    .fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ){
+                    Column(
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = "Masukkan Suhu",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 20.sp,
+                            color = Color.White)
+                        TextField(
+                            value = Suhu,
+                            onValueChange = { Suhu = it },
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(Color.White),
+                            placeholder = { Text(text = "Masukkan Suhu")})
+                        Spacer(modifier = Modifier.height(10.dp))
+                        Icon(
+                            imageVector = Icons.Default.ArrowDownward,
+                            contentDescription = "Konversi Suhu",
+                            tint = Color.White,
+                            modifier =Modifier.size(20.dp))
 
-                Button(onClick = {
-                    Hasil = RumusSuhu(Suhu = Suhu, Kode ="R")
-                    Hasil.setScale(2,RoundingMode.CEILING)
-                }) {
-                    Text(text = "R")
-                }
-                Spacer(modifier = Modifier.width(10.dp))
+                        Spacer(modifier = Modifier.height(10.dp))
 
-                Button(onClick = {
-                    Hasil = RumusSuhu(Suhu = Suhu, Kode = "K")
-                    Hasil.setScale(2,RoundingMode.CEILING)
-                }) {
-                    Text(text = "K")
+                        Text(
+                            text = "Hasil",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 20.sp,
+                            color = Color.White)
+                        TextField(
+                            value = hasil,
+                            onValueChange = { hasil = it },
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(Color.White),
+                            placeholder = { Text(text = "Masukkan Suhu")})
+                        Spacer(modifier = Modifier.height(10.dp))
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Button(onClick = {
+                                Hasil = RumusSuhu(Suhu = Suhu, Kode ="F")
+                                Hasil.setScale(2,RoundingMode.CEILING)
+                            }) {
+                                Text(text = "F")
+                            }
+                            Spacer(modifier = Modifier.width(10.dp))
+
+                            Button(onClick = {
+                                Hasil = RumusSuhu(Suhu = Suhu, Kode ="R")
+                                Hasil.setScale(2,RoundingMode.CEILING)
+                            }) {
+                                Text(text = "R")
+                            }
+                            Spacer(modifier = Modifier.width(10.dp))
+
+                            Button(onClick = {
+                                Hasil = RumusSuhu(Suhu = Suhu, Kode = "K")
+                                Hasil.setScale(2,RoundingMode.CEILING)
+                            }) {
+                                Text(text = "K")
+                            }
+                        }
+                    }
                 }
             }
         }
-    }
+    )
 }
 
 fun RumusSuhu(

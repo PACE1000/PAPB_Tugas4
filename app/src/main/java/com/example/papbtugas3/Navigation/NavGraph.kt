@@ -8,7 +8,7 @@ import com.example.papbtugas3.Screen.HomeScreen
 import com.example.papbtugas3.Screen.TemperatureScreen
 import com.example.papbtugas3.Screen.VolumeScreen
 
-@Composable
+@Composable 
 fun SetNavGraph(navController: NavHostController){
     NavHost(navController = navController, startDestination = Screen.HomeScreen.route){
         composable(route ="Home_Screen"){
