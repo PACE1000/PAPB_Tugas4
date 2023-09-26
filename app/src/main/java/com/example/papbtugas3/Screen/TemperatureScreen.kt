@@ -52,7 +52,7 @@ fun TemperatureScreen(navController: NavController){
 
     var hasil = Hasil.toString()
     Scaffold(
-        topBar = { Topbar()},
+        topBar = { Topbar(navController= navController)},
         content = {
             padding ->
             Column(

@@ -7,8 +7,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -26,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.papbtugas3.Asset.Topbar
 import com.example.papbtugas3.ui.theme.PAPBTugas3Theme
 import java.math.BigDecimal
 
@@ -50,87 +53,94 @@ fun VolumeScreen(navController: NavController){
     }
     var hasil = Hasil.toString()
 
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .background(Color.Yellow),
-        contentAlignment = Alignment.Center){
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = "Tinggi",
-                color = Color.Black,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold
-            )
+    Scaffold(
+        topBar = { Topbar(navController = navController)},
+        content = { padding ->
+            Column(
+                modifier = Modifier.padding(padding)
+            ) {
+                Box(modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Yellow),
+                    contentAlignment = Alignment.Center){
+                    Column(
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = "Tinggi",
+                            color = Color.Black,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
+                        )
 
-            TextField(value =Tinggi ,
-                onValueChange ={Tinggi = it},
-                placeholder = { Text(text = "Masukkan Tinggi")},
-                modifier = Modifier
-                    .clip(RoundedCornerShape(20.dp))
-                    .background(Color.White))
+                        TextField(value =Tinggi ,
+                            onValueChange ={Tinggi = it},
+                            placeholder = { Text(text = "Masukkan Tinggi") },
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(Color.White))
 
-            Spacer(modifier = Modifier.height(10.dp))
+                        Spacer(modifier = Modifier.height(10.dp))
 
-            Text(
-                text = "Panjang",
-                color = Color.Black,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold
-            )
+                        Text(
+                            text = "Panjang",
+                            color = Color.Black,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
+                        )
 
-            TextField(value =Panjang ,
-                onValueChange ={Panjang = it},
-                placeholder = { Text(text = "Masukkan Panjang")},
-                modifier = Modifier
-                    .clip(RoundedCornerShape(20.dp))
-                    .background(Color.White))
+                        TextField(value =Panjang ,
+                            onValueChange ={Panjang = it},
+                            placeholder = { Text(text = "Masukkan Panjang") },
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(Color.White))
 
-            Spacer(modifier = Modifier.height(10.dp))
+                        Spacer(modifier = Modifier.height(10.dp))
 
-            Text(
-                text = "Lebar",
-                color = Color.Black,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold
-            )
+                        Text(
+                            text = "Lebar",
+                            color = Color.Black,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
+                        )
 
-            TextField(value =Lebar ,
-                onValueChange ={Lebar = it},
-                placeholder = { Text(text = "Masukkan Lebar")},
-                modifier = Modifier
-                    .clip(RoundedCornerShape(20.dp))
-                    .background(Color.White))
+                        TextField(value =Lebar ,
+                            onValueChange ={Lebar = it},
+                            placeholder = { Text(text = "Masukkan Lebar") },
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(Color.White))
 
-            Spacer(modifier = Modifier.height(15.dp))
-            Button(onClick = {
-                Hasil = RumusVolume(
-                    Panjang = Panjang,
-                    Lebar = Lebar,
-                    Tinggi = Tinggi)
-            }) {
-                Text(text = "Hitung", color = Color.White)
+                        Spacer(modifier = Modifier.height(15.dp))
+                        Button(onClick = {
+                            Hasil = RumusVolume(
+                                Panjang = Panjang,
+                                Lebar = Lebar,
+                                Tinggi = Tinggi)
+                        }) {
+                            Text(text = "Hitung", color = Color.White)
+                        }
+                        Spacer(modifier = Modifier.height(15.dp))
+
+                        Text(
+                            text = "Hasil",
+                            color = Color.Black,
+                            fontSize = 30.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                        TextField(value = hasil,
+                            onValueChange ={ hasil = it},
+                            placeholder = { Text(text = "Hasil") },
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(Color.White))
+                    }
+                }
             }
-            Spacer(modifier = Modifier.height(15.dp))
-
-            Text(
-                text = "Hasil",
-                color = Color.Black,
-                fontSize = 30.sp,
-                fontWeight = FontWeight.Bold
-            )
-            TextField(value = hasil,
-                onValueChange ={ hasil = it},
-                placeholder = { Text(text = "Hasil")},
-                modifier = Modifier
-                    .clip(RoundedCornerShape(20.dp))
-                    .background(Color.White))
-
-
         }
-    }
+    )
 }
 
 fun RumusVolume(

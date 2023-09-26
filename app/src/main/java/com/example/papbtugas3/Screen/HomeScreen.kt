@@ -41,7 +41,7 @@ fun HomeScreen(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {Topbar()},
+        topBar = {Topbar(navController = navController)},
         content = { padding ->
             Column(
                 modifier = Modifier.padding(padding)

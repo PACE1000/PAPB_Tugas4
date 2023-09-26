@@ -13,18 +13,20 @@ import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.papbtugas3.ui.theme.PAPBTugas3Theme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Topbar(){
+fun Topbar(navController: NavController){
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     CenterAlignedTopAppBar(
         title = {
             Text(text = "Tugas 4 PAPB",color = Color.Black)
         },
         navigationIcon = {
-            IconButton(onClick = { "Home_Screen"}) {
+            IconButton(onClick = { navController.navigate(route = "Home_Screen")}) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
                     contentDescription = null
@@ -41,6 +43,6 @@ fun Topbar(){
 @Composable
 fun PreviewTopBar(){
     PAPBTugas3Theme {
-        Topbar()
+        Topbar(navController = rememberNavController())
     }
 }
